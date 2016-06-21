@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.indigo-pink.min.css">
+    <script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
+</head>
+<body>
+    <h3 th:text="${board.name}"></h3>
+    <div th:each="list: ${board.lists}" class="mdl-card mdl-shadow--2dp">
+        <h3 th:text="${list.name}"></h3>
+        <div th:each="card: ${list.cards}" class="mdl-card mdl-shadow--2dp">
+            <h3 th:text="${card.name}"></h3>
+            <div th:text="${card.desc}" class="mdl-card__supporting-text"></div>
+        </div>
+    </div>
+</body>
+</html>
