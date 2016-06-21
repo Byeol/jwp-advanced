@@ -16,6 +16,6 @@ public class Board extends AbstractPersistable<Long> {
 
     private String desc;
 
-    @OneToMany
+    @OneToMany(mappedBy = "board")
     private java.util.List<List> lists;
 }

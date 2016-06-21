@@ -21,6 +21,6 @@ public class List extends AbstractPersistable<Long> {
     @ManyToOne
     private Board board;
 
-    @OneToMany
+    @OneToMany(mappedBy = "list")
     private java.util.List<Card> cards;
 }
