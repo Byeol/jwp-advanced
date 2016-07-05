@@ -1,7 +1,6 @@
 package org.nhnnext.web;
 
 import lombok.RequiredArgsConstructor;
-import org.nhnnext.domain.Board;
 import org.nhnnext.domain.BoardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Controller
-public class BoardController {
+public class BoardWebController {
 
     private static final String BASE_MAPPING = "/boards";
 
