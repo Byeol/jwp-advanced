@@ -2,8 +2,8 @@ package org.nhnnext.web;
 
 import lombok.RequiredArgsConstructor;
 import org.nhnnext.domain.BaseEntity;
+import org.nhnnext.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,7 +18,7 @@ import java.net.URI;
 public abstract class RepositoryEntityController<T extends BaseEntity<T, ID>, ID extends Serializable> {
 
     private static final String BASE_MAPPING = "";
-    private final CrudRepository<T, ID> repository;
+    private final BaseService<T, ID> repository;
 
     @RequestMapping(value = BASE_MAPPING, method = RequestMethod.GET)
     public ResponseEntity<?> getCollectionResource() {
