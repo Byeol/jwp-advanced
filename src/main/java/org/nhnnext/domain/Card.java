@@ -2,7 +2,6 @@ package org.nhnnext.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -10,7 +9,7 @@ import javax.validation.constraints.NotNull;
 
 @Data
 @Entity
-public class Card extends AbstractPersistable<Long> {
+public class Card extends BaseEntity<Card, Long> {
 
     @NotNull
     private String name;
@@ -21,4 +20,10 @@ public class Card extends AbstractPersistable<Long> {
     @NotNull
     @ManyToOne
     private List list;
+
+    @Override
+    public void update(Card entity) {
+        setName(entity.getName());
+        setDesc(entity.getDesc());
+    }
 }
