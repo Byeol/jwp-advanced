@@ -4,6 +4,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.indigo-pink.min.css">
     <script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
+    <script defer src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
 </head>
 <body>
     <h3 th:text="${board.name}"></h3>
@@ -14,5 +15,48 @@
             <div th:text="${card.desc}" class="mdl-card__supporting-text"></div>
         </div>
     </div>
+
+
+    <button id="show-dialog" type="button" class="mdl-button">Create new list</button>
+    <dialog class="mdl-dialog">
+        <h4 class="mdl-dialog__title">Create a list</h4>
+        <div class="mdl-dialog__content">
+            <form id="create-form">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" id="name" name="name">
+                    <label class="mdl-textfield__label" for="name">Name</label>
+                </div>
+            </form>
+        </div>
+        <div class="mdl-dialog__actions">
+            <button type="button" class="mdl-button submit">Submit</button>
+            <button type="button" class="mdl-button close">Close</button>
+        </div>
+    </dialog>
+
+    <script th:inline="javascript">
+        var boardId = [[${board.id}]];
+        var dialog = document.querySelector('dialog');
+        var showDialogButton = document.querySelector('#show-dialog');
+        if (! dialog.showModal) {
+            dialogPolyfill.registerDialog(dialog);
+        }
+        showDialogButton.addEventListener('click', function() {
+            dialog.showModal();
+        });
+        dialog.querySelector('.close').addEventListener('click', function() {
+            dialog.close();
+        });
+        dialog.querySelector('.submit').addEventListener('click', function() {
+            $.post({
+                url: `/api/boards/${boardId}/lists`,
+                data: JSON.stringify({
+                    name: $('#name').val()
+                }),
+                contentType: 'application/json'
+            });
+            dialog.close();
+        })
+    </script>
 </body>
 </html>
