@@ -1,6 +1,7 @@
 package org.nhnnext.domain;
 
 import lombok.Data;
+import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
@@ -12,13 +13,12 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Inheritance
 @DiscriminatorColumn(name = "USER_TYPE")
-public class User extends BaseEntity<User, Long> {
+public class User extends AbstractPersistable<Long> {
 
     @NotNull
     @Column(unique = true)
     private String username;
 
-    @Override
     public void update(User entity) {
         setUsername(entity.getUsername());
     }
