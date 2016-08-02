@@ -1,7 +1,8 @@
 package org.nhnnext.security;
 
 import lombok.RequiredArgsConstructor;
-import org.nhnnext.domain.UserRepository;
+import org.nhnnext.domain.user.LocalUser;
+import org.nhnnext.domain.user.LocalUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -18,11 +19,11 @@ import java.util.List;
 @Component
 public class JpaUserDetailsService implements UserDetailsService {
 
-    private final UserRepository userRepository;
+    private final LocalUserRepository localUserRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        org.nhnnext.domain.User user = userRepository.findByUsername(username);
+        LocalUser user = localUserRepository.findByUsername(username);
 
         if (user == null) {
             throw new UsernameNotFoundException(MessageFormat.format("Username {0} not found", username));
